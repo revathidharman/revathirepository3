@@ -1,0 +1,410 @@
+SQL> create table Doraemon(id number(3) primary key,name varchar(20) not null,email varchar(20) null
+,phoneNo number(10)not null unique);
+create table Doraemon(id number(3) primary key,name varchar(20) not null,email varchar(20) null,phon
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create table shinchan(id number(3) primary key,name varchar(20) not null,email varchar(20) null
+,phoneNo number(10)not null unique);
+
+Table created.
+
+SQL> describe shinchan;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(3)
+ NAME                                      NOT NULL VARCHAR2(20)
+ EMAIL                                              VARCHAR2(20)
+ PHONENO                                   NOT NULL NUMBER(10)
+
+SQL> desc shinchan;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(3)
+ NAME                                      NOT NULL VARCHAR2(20)
+ EMAIL                                              VARCHAR2(20)
+ PHONENO                                   NOT NULL NUMBER(10)
+
+SQL> rename shinchan to hatori;
+
+Table renamed.
+
+SQL> desc shinchan;
+ERROR:
+ORA-04043: object shinchan does not exist
+
+
+SQL> desc hatori;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(3)
+ NAME                                      NOT NULL VARCHAR2(20)
+ EMAIL                                              VARCHAR2(20)
+ PHONENO                                   NOT NULL NUMBER(10)
+
+SQL> alter table hatori add age number(2) not null;
+
+Table altered.
+
+SQL> desc hatori;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(3)
+ NAME                                      NOT NULL VARCHAR2(20)
+ EMAIL                                              VARCHAR2(20)
+ PHONENO                                   NOT NULL NUMBER(10)
+ AGE                                       NOT NULL NUMBER(2)
+
+SQL> alter table hatori drop column age;
+
+Table altered.
+
+SQL> desc hatori;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(3)
+ NAME                                      NOT NULL VARCHAR2(20)
+ EMAIL                                              VARCHAR2(20)
+ PHONENO                                   NOT NULL NUMBER(10)
+
+SQL> alter table hatori rename column phoneNo to mobileno;
+
+Table altered.
+
+SQL> desc hatori;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(3)
+ NAME                                      NOT NULL VARCHAR2(20)
+ EMAIL                                              VARCHAR2(20)
+ MOBILENO                                  NOT NULL NUMBER(10)
+
+SQL> alter table hatori modify mobileno varchar(10);
+
+Table altered.
+
+SQL> desc hatori;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(3)
+ NAME                                      NOT NULL VARCHAR2(20)
+ EMAIL                                              VARCHAR2(20)
+ MOBILENO                                  NOT NULL VARCHAR2(10)
+
+SQL> alter table hatori modify mobileno number(10);
+
+Table altered.
+
+SQL> desc hatori;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(3)
+ NAME                                      NOT NULL VARCHAR2(20)
+ EMAIL                                              VARCHAR2(20)
+ MOBILENO                                  NOT NULL NUMBER(10)
+
+SQL> alter table hatori modify email not null;
+
+Table altered.
+
+SQL> desc hatori;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(3)
+ NAME                                      NOT NULL VARCHAR2(20)
+ EMAIL                                     NOT NULL VARCHAR2(20)
+ MOBILENO                                  NOT NULL NUMBER(10)
+
+SQL> drop table hatori;
+
+Table dropped.
+
+SQL> desc hatori;
+ERROR:
+ORA-04043: object hatori does not exist
+
+
+SQL> flashback table hatori to before drop;
+
+Flashback complete.
+
+SQL> desc hatori;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(3)
+ NAME                                      NOT NULL VARCHAR2(20)
+ EMAIL                                     NOT NULL VARCHAR2(20)
+ MOBILENO                                  NOT NULL NUMBER(10)
+
+SQL> insert into hatori values(1,'ironman','iron@gmail.com',987654);
+
+1 row created.
+
+SQL> select * from hatori;
+
+        ID NAME                 EMAIL                  MOBILENO
+---------- -------------------- -------------------- ----------
+         1 ironman              iron@gmail.com           987654
+
+SQL> insert all into hatori(id,name,email,mobileno)values(2,'superman','super@gmail.com',7654566)
+  2  into hatori(id,name,email,mobileno)values(3,'batman','bat@gmail.com',56789)select * from dual;
+
+2 rows created.
+
+SQL> select * from hatori;
+
+        ID NAME                 EMAIL                  MOBILENO
+---------- -------------------- -------------------- ----------
+         1 ironman              iron@gmail.com           987654
+         2 superman             super@gmail.com         7654566
+         3 batman               bat@gmail.com             56789
+
+SQL> truncate table hatori;
+
+Table truncated.
+
+SQL> select * from hatori;
+
+no rows selected
+
+SQL> desc hatori;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(3)
+ NAME                                      NOT NULL VARCHAR2(20)
+ EMAIL                                     NOT NULL VARCHAR2(20)
+ MOBILENO                                  NOT NULL NUMBER(10)
+
+SQL> insert into hatori values(1,'ironman','iron@gmail.com',987654);
+
+1 row created.
+
+SQL> insert all into hatori(id,name,email,mobileno)values(2,'superman','super@gmail.com',7654566)
+  2  into hatori(id,name,email,mobileno)values(3,'batman','bat@gmail.com',56789)select * from dual;
+
+2 rows created.
+
+SQL> select * from hatori;
+
+        ID NAME                 EMAIL                  MOBILENO
+---------- -------------------- -------------------- ----------
+         1 ironman              iron@gmail.com           987654
+         2 superman             super@gmail.com         7654566
+         3 batman               bat@gmail.com             56789
+
+SQL> update hatori set name='spiderman',email='spider@gmail.com' where id=3;
+
+1 row updated.
+
+SQL> select * from hatori;
+
+        ID NAME                 EMAIL                  MOBILENO
+---------- -------------------- -------------------- ----------
+         1 ironman              iron@gmail.com           987654
+         2 superman             super@gmail.com         7654566
+         3 spiderman            spider@gmail.com          56789
+
+SQL> delete table hatori where id=2;
+delete table hatori where id=2
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> delete hatori where id=2;
+
+1 row deleted.
+
+SQL> select * from hatori;
+
+        ID NAME                 EMAIL                  MOBILENO
+---------- -------------------- -------------------- ----------
+         1 ironman              iron@gmail.com           987654
+         3 spiderman            spider@gmail.com          56789
+
+SQL> connect hr
+Enter password: *****
+Connected.
+SQL> select * from hatori;
+select * from hatori
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> connect scott
+Enter password: *****
+Connected.
+SQL> select * from hatori;
+
+        ID NAME                 EMAIL                  MOBILENO
+---------- -------------------- -------------------- ----------
+         1 ironman              iron@gmail.com           987654
+         3 spiderman            spider@gmail.com          56789
+
+SQL> grant select on hatori to hr;
+
+Grant succeeded.
+
+SQL> connect hr;
+Enter password: *****
+Connected.
+SQL> select * from hatori;
+select * from hatori
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from scott.hatori;
+
+        ID NAME                 EMAIL                  MOBILENO
+---------- -------------------- -------------------- ----------
+         1 ironman              iron@gmail.com           987654
+         3 spiderman            spider@gmail.com          56789
+
+SQL> connect scott
+Enter password: *****
+Connected.
+SQL> revoke select on hatori from hr;
+
+Revoke succeeded.
+
+SQL> connect hr
+Enter password: *****
+Connected.
+SQL> select * from scott.hatori;
+select * from scott.hatori
+                    *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> connect scott
+Enter password: *****
+Connected.
+SQL> select * from hatori;
+
+        ID NAME                 EMAIL                  MOBILENO
+---------- -------------------- -------------------- ----------
+         1 ironman              iron@gmail.com           987654
+         3 spiderman            spider@gmail.com          56789
+
+SQL> create table motu(id number(2)primary key,name varchar(20)not null, email varchar(30)not null);
+
+
+Table created.
+
+SQL> desc motu;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(2)
+ NAME                                      NOT NULL VARCHAR2(20)
+ EMAIL                                     NOT NULL VARCHAR2(30)
+
+SQL> insert into motu values(11,'patlu','patlu@gmail.com');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> insert into motu values(12,'sathish','sathish@gmail.com');
+
+1 row created.
+
+SQL> insert into motu values(13,'akshaya','aks@gmail.com');
+
+1 row created.
+
+SQL> select * from motu;
+
+        ID NAME                 EMAIL
+---------- -------------------- ------------------------------
+        11 patlu                patlu@gmail.com
+        12 sathish              sathish@gmail.com
+        13 akshaya              aks@gmail.com
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from motu;
+
+        ID NAME                 EMAIL
+---------- -------------------- ------------------------------
+        11 patlu                patlu@gmail.com
+
+SQL> insert into motu values(12,'sathish','sathi@gmail.com');
+
+1 row created.
+
+SQL> insert into motu values(13,'akshaya','aks@gmail.com');
+
+1 row created.
+
+SQL> savepoint a;
+
+Savepoint created.
+
+SQL> insert into motu values(14,'naruto','naruto@gmail.com');
+
+1 row created.
+
+SQL> savepoint b;
+
+Savepoint created.
+
+SQL> insert into motu values(15,'hinata','hinata@gmail.com');
+
+1 row created.
+
+SQL> select * from motu;
+
+        ID NAME                 EMAIL
+---------- -------------------- ------------------------------
+        11 patlu                patlu@gmail.com
+        12 sathish              sathi@gmail.com
+        13 akshaya              aks@gmail.com
+        14 naruto               naruto@gmail.com
+        15 hinata               hinata@gmail.com
+
+SQL> rollback to b;
+
+Rollback complete.
+
+SQL> select * from motu;
+
+        ID NAME                 EMAIL
+---------- -------------------- ------------------------------
+        11 patlu                patlu@gmail.com
+        12 sathish              sathi@gmail.com
+        13 akshaya              aks@gmail.com
+        14 naruto               naruto@gmail.com
+
+SQL> rollback to a;
+
+Rollback complete.
+
+SQL> select * from motu;
+
+        ID NAME                 EMAIL
+---------- -------------------- ------------------------------
+        11 patlu                patlu@gmail.com
+        12 sathish              sathi@gmail.com
+        13 akshaya              aks@gmail.com
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from motu;
+
+        ID NAME                 EMAIL
+---------- -------------------- ------------------------------
+        11 patlu                patlu@gmail.com
+
+SQL> 
