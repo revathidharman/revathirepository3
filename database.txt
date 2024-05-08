@@ -1,0 +1,116 @@
+Data Base:
+
+data--->collection of rawfacts
+information--->collection of processed data
+
+Database:it is a memory location to store a data 
+
+DBMS: ---> it is a software
+	   data is stored in a file format.
+RDBMS: ---> table format.
+
+datatypes--->
+
+char()
+varchar()
+varchar2()
+Number()
+Number(p,s)
+int
+float
+large objects
+date  --> 3 bytes 
+
+DD-MM-YYYY
+time stamp----> 8 bytes
+DD-MM-YY    HH:MM:ms
+
+
+
+binary --->audio,video,images  blob()
+character-->pdf,txt,doc         clob()
+
+char()size  2000 characters
+fixed memory allocation
+it is faster than varchar
+
+varchar()size  2000characters
+variable memory allocation
+memory is used in a efficient way
+
+
+varchar2() 4000 characters.
+
+
+constraints--->
+
+null  ---> nothing/empty
+not null--->it is used to avoid null
+check------>
+unique---->columns
+primary key--->table
+foreign key--->
+
+
+Statements of sql
+
+DDL---->data definition language
+DML---->data Manupulation language
+DCL---->data control language
+TCL---->transaction control language
+DQL---->data query language
+
+
+
+data definition language
+
+1.create:-
+syntax:- create table table_name(columnname datatype(size) constraints.....)
+2.rename:-
+syntax:- rename oldname to newname
+3.alter:
+ i. to add a column:-
+	syntax: alter table table_name add columnname datatype contraint
+ ii.to drop a column:-
+	syntax: alter table table_name drop  column columnname
+ iii.to rename a column:-
+	syntax: alter table table_name rename column columnname to newcolumnname
+ iv. to modify datatype:-
+	syntax: alter table table_name modify columnname newdatatype
+ v. to modify constraint:-
+	syntax: alter table table_name modify columnname existingdatatype[null/notnull]
+4.drop:
+syntax: drop table table_name.
+flashback:
+syntax: flashback table table_name to before drop.
+5.truncate:
+syntax: truncate table table_name;
+
+data manipulation language:
+
+1.insert:
+2.update
+3.delete
+
+
+data control language:
+
+grant--->giving permission
+revoke--->cancelling the given permission
+
+
+grant: grant select on table_name to user_name
+
+revoke: revoke select on table_name from user_name
+
+
+TCL:
+
+commit; save
+rollback
+savepoint referencename
+rollback to referencename
+
+
+
+
